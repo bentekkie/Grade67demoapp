@@ -17,7 +17,7 @@ public class MainActivity extends Activity implements View.OnClickListener, View
     GridLayout grid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.setTitle("Sound Cart Demo App");
+        super.setTitle("Custom Sound Cart");
         super.onCreate(savedInstanceState);
         ScrollView frame = new ScrollView(this);
         grid = new GridLayout(this);
