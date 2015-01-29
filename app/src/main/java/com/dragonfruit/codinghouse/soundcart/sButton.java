@@ -20,6 +20,7 @@ public class sButton extends Button implements MediaPlayer.OnCompletionListener 
     Uri data;
     String name;
     int state = 0;
+    public static final int Add = 0,Play = 1,Playing = 2;
     public sButton(Context context) {
         super(context);
         this.setText("Add");

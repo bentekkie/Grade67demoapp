@@ -3,7 +3,6 @@ package com.dragonfruit.codinghouse.soundcart;
 //Code written by: Benjmain Segall
 import android.app.Activity;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,14 +10,11 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
-
 import java.io.IOException;
 
 
 public class MainActivity extends Activity implements View.OnClickListener, View.OnLongClickListener {
     GridLayout grid;
-    // Tags
-    final int Add = 0,Play = 1,Playing = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setTitle("Sound Cart Demo App");
@@ -26,7 +22,6 @@ public class MainActivity extends Activity implements View.OnClickListener, View
         ScrollView frame = new ScrollView(this);
         grid = new GridLayout(this);
         grid.setColumnCount(1);
-        grid.setRowCount(10);
         addButton();
         frame.setSmoothScrollingEnabled(true);
         frame.addView(grid);
@@ -42,21 +37,21 @@ public class MainActivity extends Activity implements View.OnClickListener, View
     public void onClick(View v) {
         sButton temp = (sButton)v;
         switch(temp.getState()){
-            case Add:
+            case sButton.Add:
                 Intent intent = new Intent();
                 intent.setType("audio/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Choose Sound"), 1);
                 break;
-            case Play:
+            case sButton.Play:
                 temp.play();
                 temp.setText("Playing "+ temp.getName());
-                temp.setState(Playing);
+                temp.setState(sButton.Playing);
                 break;
-            case Playing:
+            case sButton.Playing:
                 temp.stop();
                 temp.setText("Play "+ temp.getName());
-                temp.setState(Play);
+                temp.setState(sButton.Play);
                 break;
 
         }
@@ -80,7 +75,7 @@ public class MainActivity extends Activity implements View.OnClickListener, View
                 sButton temp = ((sButton) grid.getChildAt(grid.getChildCount() - 1));
                 temp.prepareMediaPlayer(getApplicationContext(),selectedAudio);
                 temp.setText("Play "+temp.getName());
-                temp.setState(Play);
+                temp.setState(sButton.Play);
                 addButton();
             }
 
@@ -89,7 +84,11 @@ public class MainActivity extends Activity implements View.OnClickListener, View
 
     @Override
     public boolean onLongClick(View v) {
+        if(((sButton)v).getState() != sButton.Add){
         v.setVisibility(View.GONE);
+        grid.removeView(v);
         return true;
+        }else return false;
+
     }
 }

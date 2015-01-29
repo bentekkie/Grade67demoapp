@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Grade67demoapp.iml" filepath="$PROJECT_DIR$/Grade67demoapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Soundcart.iml" filepath="$PROJECT_DIR$/Soundcart.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
