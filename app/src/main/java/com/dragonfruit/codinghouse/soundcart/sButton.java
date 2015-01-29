@@ -96,4 +96,6 @@ public class sButton extends Button implements MediaPlayer.OnCompletionListener 
         this.setText("Play " +getName());
         setState(1);
     }
+
+
 }

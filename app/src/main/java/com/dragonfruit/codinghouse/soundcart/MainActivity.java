@@ -7,21 +7,25 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 import java.io.IOException;
 
 
 public class MainActivity extends Activity implements View.OnClickListener, View.OnLongClickListener {
-    GridLayout grid;
+    private ListView grid;
+    private ArrayAdapter<sButton> listAdapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setTitle("Custom Sound Cart");
         super.onCreate(savedInstanceState);
         ScrollView frame = new ScrollView(this);
-        grid = new GridLayout(this);
-        grid.setColumnCount(1);
+        grid = new ListView(this);
+        listAdapter = new soundAdapter(this,R.layout.row);
+        grid.setAdapter(listAdapter);
         addButton();
         frame.setSmoothScrollingEnabled(true);
         frame.addView(grid);
@@ -31,7 +35,7 @@ public class MainActivity extends Activity implements View.OnClickListener, View
         sButton button = new sButton(this);
         button.setOnClickListener(this);
         button.setOnLongClickListener(this);
-        grid.addView(button);
+        listAdapter.add(button);
     }
     @Override
     public void onClick(View v) {
